@@ -16,7 +16,7 @@
 # Install
 
 ```bash
-composer install supportpal/accept-language-parser
+composer require supportpal/accept-language-parser
 ```
 
 # Usage
