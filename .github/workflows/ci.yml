@@ -26,5 +26,5 @@ jobs:
             - name: Install dependencies
               run: composer install --no-interaction --no-progress
 
-            - name: Execute Cache tests
+            - name: Execute tests
               run: ./vendor/bin/phpunit --stop-on-fail
