@@ -10,9 +10,8 @@ jobs:
             fail-fast: true
             matrix:
                 php: [5.3, 5.4, 5.5, 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0]
-                stability: [prefer-stable]
 
-        name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
+        name: PHP ${{ matrix.php }}
 
         steps:
             - name: Checkout code
@@ -25,7 +24,7 @@ jobs:
                   tools: composer:v2
 
             - name: Install dependencies
-              run: composer install --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
+              run: composer install --no-interaction --no-progress
 
             - name: Execute Cache tests
               run: ./vendor/bin/phpunit --stop-on-fail
