@@ -13,6 +13,36 @@
 
 ----
 
+# Install
+
+```bash
+composer install supportpal/accept-language-parser
+```
+
+# Usage
+
+## Parse
+
+Parses an ACCEPT_LANGUAGE header and returns all parsed locales.
+
+```php
+$parser = new \SupportPal\AcceptLanguageParser\Parser($_SERVER['http_accept_language']);
+foreach ($parser->parse() as $component) {
+    echo $component->code();
+}
+```
+
+## Pick
+
+Parses an ACCEPT_LANGUAGE header and returns only locales which match those requested.
+
+```php
+$parser = new \SupportPal\AcceptLanguageParser\Parser('en-GB;q=0.8');
+foreach ($parser->pick(array('en')) as $component) {
+    echo $component->code();
+}
+```
+
 # License
 
 This package is licensed under the <a href="https://github.com/supportpal/accept-language-parser/blob/master/LICENSE">MIT License</a>.
