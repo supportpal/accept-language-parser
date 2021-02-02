@@ -1,0 +1,36 @@
+{
+  "name": "supportpal/accept-language-parser",
+  "description": "An alternative to ext-intl's locale_accept_from_http function.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kieran Brahney",
+      "email": "kieran@supportpal.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "SupportPal\\AcceptLanguageParser\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SupportPal\\AcceptLanguageParser\\Tests\\": "test/"
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "secure-http": false,
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
