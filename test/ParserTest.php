@@ -153,4 +153,59 @@ class ParserTest extends TestCase
             )
         );
     }
+
+    /**
+     * @dataProvider pickIso897Provider
+     *
+     * @param string[] $supported
+     * @param bool $strict
+     * @param string $header
+     * @param string $expected
+     */
+    public function testPickIso15897($supported, $strict, $header, $expected)
+    {
+        $parser = new Parser($header);
+        $result = $parser->pickIso15897($supported, $strict);
+
+        $this->assertSame($expected, $result ? $result->toIso15897() : '');
+    }
+
+    public function pickIso897Provider()
+    {
+        return array(
+            array(
+                array('en_US', 'fr_CA'),
+                true,
+                'fr-CA,fr;q=0.2,en-US;q=0.6,en;q=0.4,*;q=0.5',
+                'fr_CA'
+            ),
+            array(
+                array('zh_Hant_cn', 'zh_cn'),
+                true,
+                'zh-Hant-cn,zh-cn;q=0.6,zh;q=0.4',
+                'zh_Hant_cn',
+            ),
+            array(
+                array('en_us', 'it_IT'), true, 'pl-PL,en', 'en_us',
+            ),
+            array(
+                array('ko_KR'), true, 'fr-CA,fr;q=0.8,en-US;q=0.6,en;q=0.4,*;q=0.1', ''
+            ),
+            array(
+                array(), true, 'fr-CA,fr;q=0.8,en-US;q=0.6,en;q=0.4,*;q=0.1', ''
+            ),
+            array(
+                array('en'), true, '', ''
+            ),
+            array(
+                array('en', 'pl'), true, 'en-US;q=0.6', '',
+            ),
+            array(
+                array('en', 'pl'), false, 'en-US;q=0.6', 'en', // loose mode
+            ),
+            array(
+                array('en_US', 'en', 'pl'), false, 'en-US;q=0.6', 'en_US', // loose mode
+            )
+        );
+    }
 }
