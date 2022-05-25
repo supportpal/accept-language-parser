@@ -47,7 +47,7 @@ class Parser
     }
 
     /**
-     * @param string[] $supportedLocales
+     * @param string[] $supportedLocales BCP-47 locales.
      * @param bool $strict
      * @return Component|null
      */
@@ -66,5 +66,20 @@ class Parser
         }
 
         return null;
+    }
+
+    /**
+     * @param string[] $iso15897Locales ISO 15897 locales.
+     * @param bool $strict
+     * @return Component|null
+     */
+    public function pickIso15897(array $iso15897Locales, $strict = true)
+    {
+        // convert to bcp-47
+        $bcp47Locales = array_map(function ($locale) {
+            return str_replace(Component::ISO15897_SEPARATOR, Component::BCP47_SEPARATOR, $locale);
+        }, $iso15897Locales);
+
+        return $this->pick($bcp47Locales, $strict);
     }
 }

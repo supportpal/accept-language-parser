@@ -4,6 +4,9 @@ namespace SupportPal\AcceptLanguageParser;
 
 class Component
 {
+    const BCP47_SEPARATOR = '-';
+    const ISO15897_SEPARATOR = '_';
+
     /** @var string */
     private $code;
 
@@ -80,15 +83,23 @@ class Component
     /**
      * @return string
      */
+    public function toIso15897()
+    {
+        return str_replace(self::BCP47_SEPARATOR, self::ISO15897_SEPARATOR, $this->__toString());
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         $string = $this->code();
         if ($this->script() !== null) {
-            $string .= '-' . $this->script();
+            $string .= self::BCP47_SEPARATOR . $this->script();
         }
 
         if ($this->region() !== null) {
-            $string .= '-' . $this->region();
+            $string .= self::BCP47_SEPARATOR . $this->region();
         }
 
         return $string;
@@ -126,7 +137,7 @@ class Component
     public static function parse($value)
     {
         $bits = explode(';', $value);
-        $ietf = explode('-', $bits[0]);
+        $ietf = explode(self::BCP47_SEPARATOR, $bits[0]);
         $hasScript = count($ietf) === 3;
 
         $code    = $ietf[0];
