@@ -126,8 +126,8 @@ class Component
     public function isEqualTo(Component $component, $strict)
     {
         return strcasecmp($this->code(), $component->code()) === 0
-            && (! $strict || $component->script() === null || strcasecmp($this->script(), $component->script()) === 0)
-            && (! $strict || $component->region() === null || strcasecmp($this->region(), $component->region()) === 0);
+            && (! $strict || $component->script() === null || strcasecmp((string) $this->script(), $component->script()) === 0)
+            && (! $strict || $component->region() === null || strcasecmp((string) $this->region(), $component->region()) === 0);
     }
 
     /**
