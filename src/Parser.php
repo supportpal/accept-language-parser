@@ -53,15 +53,16 @@ class Parser
      */
     public function pick(array $supportedLocales, $strict = true)
     {
-        foreach ($supportedLocales as $key => $locale) {
-            $supportedLocales[$key] = Component::parse($locale);
+        /** @var Component[] $locales */
+        $locales = [];
+        foreach ($supportedLocales as $locale) {
+            $locales[] = Component::parse($locale);
         }
 
         foreach ($this->parse() as $component) {
-            foreach ($supportedLocales as $supportedComponent) {
-                if ($supportedComponent->isEqualTo($component, $strict)) {
-                    return $supportedComponent;
-                }
+            $match = $this->findClosestMatch($locales, $component, $strict);
+            if ($match) {
+                return $match;
             }
         }
 
@@ -81,5 +82,30 @@ class Parser
         }, $iso15897Locales);
 
         return $this->pick($bcp47Locales, $strict);
+    }
+
+    /**
+     * @param Component[] $components
+     * @param Component $component
+     * @param bool $strict
+     * @return Component|null
+     */
+    private function findClosestMatch(array $components, Component $component, $strict)
+    {
+        $results = [];
+        foreach ($components as $supportedComponent) {
+            if ($supportedComponent->isEqualTo($component, $strict)) {
+                $results[] = $supportedComponent;
+            }
+        }
+
+        /** @var Component $result */
+        foreach ($results as $result) {
+            if ($result->isEqualTo($component, true)) {
+                return $result;
+            }
+        }
+
+        return $results[0] ?? null;
     }
 }

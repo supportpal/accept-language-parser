@@ -145,11 +145,15 @@ class ParserTest extends TestCase
             array(
                 array('en', 'pl'), true, 'en-US;q=0.6', '',
             ),
+            // loose mode
             array(
-                array('en', 'pl'), false, 'en-US;q=0.6', 'en', // loose mode
+                array('en', 'pl'), false, 'en-US;q=0.6', 'en',
             ),
             array(
-                array('en-US', 'en', 'pl'), false, 'en-US;q=0.6', 'en-US', // loose mode
+                array('en-US', 'en', 'pl'), false, 'en-US;q=0.6', 'en-US',
+            ),
+            array(
+                array('en', 'en-US', 'pl'), false, 'en-US;q=0.6', 'en-US',
             )
         );
     }
