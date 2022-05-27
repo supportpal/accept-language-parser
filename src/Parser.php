@@ -106,6 +106,6 @@ class Parser
             }
         }
 
-        return $results[0] ?? null;
+        return isset($results[0]) ? $results[0] : null;
     }
 }
