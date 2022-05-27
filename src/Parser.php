@@ -54,7 +54,7 @@ class Parser
     public function pick(array $supportedLocales, $strict = true)
     {
         /** @var Component[] $locales */
-        $locales = [];
+        $locales = array();
         foreach ($supportedLocales as $locale) {
             $locales[] = Component::parse($locale);
         }
@@ -92,7 +92,7 @@ class Parser
      */
     private function findClosestMatch(array $components, Component $component, $strict)
     {
-        $results = [];
+        $results = array();
         foreach ($components as $supportedComponent) {
             if ($supportedComponent->isEqualTo($component, $strict)) {
                 $results[] = $supportedComponent;
