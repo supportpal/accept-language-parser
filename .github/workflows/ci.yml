@@ -16,6 +16,8 @@ jobs:
                     phpunit-versions: '9.5.1'
                   - php: '8.1'
                     phpunit-versions: '9.5.20'
+                  - php: '8.2'
+                    phpunit-versions: '9.5.20'
 
         name: PHP ${{ matrix.php }}
 
