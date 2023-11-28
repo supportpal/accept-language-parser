@@ -9,15 +9,17 @@ jobs:
         strategy:
             fail-fast: true
             matrix:
-                php: [5.3, 5.4, 5.5, 5.6, 7.0, 7.1, 7.2, 7.3, 7.4]
+                php: ['5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4']
                 phpunit-versions: ['4.8.36']
                 include:
                   - php: '8.0'
                     phpunit-versions: '9.5.1'
                   - php: '8.1'
-                    phpunit-versions: '9.5.20'
+                    phpunit-versions: '9.6.13'
                   - php: '8.2'
-                    phpunit-versions: '9.5.20'
+                    phpunit-versions: '9.6.13'
+                  - php: '8.3'
+                    phpunit-versions: '9.6.13'
 
         name: PHP ${{ matrix.php }}
 
