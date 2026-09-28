@@ -37,7 +37,7 @@ jobs:
                   tools: composer:v2, phpunit:${{ matrix.phpunit-versions }}
 
             - name: Install dependencies
-              run: composer update --prefer-dist --no-interaction --no-progress --no-blocking
+              run: composer update --prefer-dist --no-interaction --no-progress
 
             - name: Execute tests
               run: phpunit --stop-on-fail

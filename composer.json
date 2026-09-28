@@ -28,6 +28,11 @@
   "config": {
     "preferred-install": "dist",
     "secure-http": false,
+    "policy": {
+      "advisories": {
+        "ignore-id": ["PKSA-z3gr-8qht-p93v", "PKSA-w57n-mhp6-c9sd"]
+      }
+    },
     "optimize-autoloader": true,
     "sort-packages": true
   },
